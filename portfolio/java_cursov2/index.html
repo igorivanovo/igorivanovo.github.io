@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title></title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <link href="/static/img/favicon.png" rel="icon">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="/static/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/static/assets/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/static/assets/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/static/assets/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="/static/assets/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/static/assets/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/69e2443572.js" crossorigin="anonymous"></script>
+  <link href="/static/css/style.css" rel="stylesheet">
+  
+</head>
+<body>
+  <main id="main">
+
+<style>
+body::before {
+	background: #040404 url("/static/img/portfolio/post.jpg");
+}
+</style>
+    <!-- ======= шаблон для карточки портфолио ======= -->
+    <div id="portfolio-details" class="portfolio-details">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <h2 class="portfolio-title">Курсовая работа «Менеджер личных финансов»</h2>
+          </div>
+          <div class="col-lg-8 portfolio-info">
+            <h3></h3>
+            <ul>
+              <li><strong>Категория</strong>: Учебный Проект</li>
+              <li><strong>Описание</strong>: Нашей целью будет написать серверное мавен-приложение, играющее роль менеджера личных финансов.</li>
+              <li><strong>Примечания</strong>: <a href="https://github.com/igorivanovo/PersonalFinanceManager.git">Репозиаторий на GitHab</a></li>
+            </ul>
+            <p>
+              <h1>Описание</h1>
+<p>У приложения в корневой папке находится текстовый файл categories.tsv,
+ категоризирующий название каждой покупки (разделитель - символ Tab, в джаве 
+ пишется как '\t'):</p>
+<p><code>булка  еда</code><br>
+<code>колбаса    еда</code><br>
+<code>сухарики   еда</code><br>
+<code>курица еда</code><br>
+<code>тапки  одежда</code><br>
+<code>шапка  одежда</code><br>
+<code>мыло   быт</code><br>
+<code>акции  финансы</code><br></p>
+<p>На сервер  приходят запросы на  с информацией о покупке в формате json:</p>
+<p>1 <code>{"title": "булка", "date": "2022.02.08", "sum": 200}</code></p>
+<p>Дата будет именно в таком формате - год.месяц.число. Обратите внимание, что приходит название покупки, а не категория. Если названия в файле категорий нет, то должна выбиратья категория <code>другое</code>.</p>
+<p>Сервер же в ответ отдаёт текстовый JSON вида :
+<code>{</code><br>
+&ensp;<code>"maxCategory": {</code><br>
+&ensp;&ensp;<code>"category": "еда",</code><br>
+&ensp;&ensp;<code>"sum": 200</code><br>
+&ensp;<code>}</code><br>
+<code>}</code><br></p>
+<p>автосохранение данных:  после каждой операции сервер записывает в файл data.bin, размещённый в корне проекта, всю нужную статистику для работы сервера. В случае старта сервера и наличия этого файла, он загружает все предыдущие данные из него.</p>
+<p>Объект статистики содержит дополнительные поля, которые показывают максимальную категорию за год, месяц и день сохранённой покупки:<br>
+<code>{</code><br>
+&ensp;<code>"maxCategory": {</code><br>
+&ensp;&ensp;<code>"category": "еда",</code><br>
+&ensp;&ensp;<code>"sum": 350000</code><br>
+&ensp;<code>},</code><br>
+&ensp;<code>"maxYearCategory": {</code><br>
+&ensp;&ensp;<code>"category": "еда",</code><br>
+&ensp;&ensp;<code>"sum": 300000</code><br>
+&ensp;<code>},</code><br>
+&ensp;<code>"maxMonthCategory": {</code><br>
+&ensp;&ensp;<code>"category": "еда",</code><br>
+&ensp;&ensp;<code>"sum": 24000</code><br>
+&ensp;<code>},</code><br>
+&ensp;<code>"maxDayCategory": {</code><br>
+&ensp;&ensp;<code>"category": "одежда",</code><br>
+&ensp;&ensp;<code>"sum": 3000;</code><br>
+&ensp;<code>},</code><br>
+<code>}</code><br></p>
+<p>Этот объект состоит из четырёх полей, каждое из которых отображает максимальную по абсолютным тратам категорию за соответствующий период - <code>maxCategory</code> за всё время, <code>maxYearCategory</code> - за год добавленной покупки, <code>maxMonthCategory</code> за месяц добавленной покупки, <code>maxDayCategory</code> за день добавленной покупки.</p>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div><!-- конец карточки -->
+  <!-- конец поста -->
+
+  </main>
+  <!-- Скрипты -->
+  <script src="/static/assets/purecounter/purecounter.js"></script>
+  <script src="/static/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/assets/glightbox/js/glightbox.min.js"></script>
+  <script src="/static/assets/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="/static/assets/swiper/swiper-bundle.min.js"></script>
+  <script src="/static/assets/waypoints/noframework.waypoints.js"></script>
+  <script src="/static/js/main.js"></script>
+</body>
+</html>

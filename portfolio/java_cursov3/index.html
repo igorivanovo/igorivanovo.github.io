@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title></title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <link href="/static/img/favicon.png" rel="icon">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="/static/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/static/assets/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/static/assets/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/static/assets/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="/static/assets/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/static/assets/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/69e2443572.js" crossorigin="anonymous"></script>
+  <link href="/static/css/style.css" rel="stylesheet">
+  
+</head>
+<body>
+  <main id="main">
+
+<style>
+body::before {
+	background: #040404 url("/static/img/portfolio/post.jpg");
+}
+</style>
+    <!-- ======= шаблон для карточки портфолио ======= -->
+    <div id="portfolio-details" class="portfolio-details">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <h2 class="portfolio-title">Курсовая работа «Менеджер задач»</h2>
+          </div>
+          <div class="col-lg-8 portfolio-info">
+            <h3></h3>
+            <ul>
+              <li><strong>Категория</strong>: Учебный Проект</li>
+              <li><strong>Описание</strong>: Нам предстоит разработать сервер, отвечающий за менеджмент списка дел.</li>
+              <li><strong>Примечания</strong>: <a href="https://github.com/igorivanovo/pcs-jpat-diplom.git">Репозиаторий на GitHab</a></li>
+            </ul>
+            <p>
+              <h1>TODOs</h1>
+<p>Центральным для логики программы компонентом будет класс Todos. Объект этого класса должен содержать в себе набор задач, добавленных в систему.</p>
+<p>Каждая задача представляет собой обычное значение типа String. Например: "Сходить в магазин", "Пойти на пробежку". Все задачи добавленные в менеджер можно считать уникальными, т.е. без повторов.</p>
+<p>Изначально объект этого класса не должен содержать никаких задач, но должна быть возможность:</p>
+<p>добавить их через метод add;
+удалить через метод remove.
+отменить действие последней не-RESTORE-операции. Т.е. после операций</p>
+<p>{ "type": "ADD", "task": "Первая" }
+{ "type": "ADD", "task": "Вторая" }
+{ "type": "REMOVE", "task": "Первая" }
+{ "type": "ADD", "task": "Третья" }
+{ "type": "RESTORE" }
+{ "type": "RESTORE" }
+В списке задач в ответ на последнюю операцию будет прислано: "Вторая Первая".</p>
+<p>Также у этого объекта есть возможность получить все актуальные задачи разом через метод getAllTasks - метод возвращает все задачи через пробел в отсортированном лексикографическом (словарном) порядке. Например, если мы добавили задачу "Пробежка", "Акробатика" и "Учёба", то этот метод возвращает строку вида Акробатика Пробежка Учёба.</p>
+<p>Также есть дополнительное условие - в списке задач не должно быть больше чем 7 задач. Поэтому, при попытке добавления 8й задачи она добавляться не должна (клиент поймёт что задача не добавлена не увидев её в списке всех задач в ответе от сервера).</p>
+<p>Также написаны тесты на основе JUnit 5,  тестирующие его в разных сценариях. Для этого  подключена зависимость в проект (org.junit.jupiter:junit-jupiter:5.7.0). </p>
+<h1>Сервер</h1>
+<p>Программа  принимает запросы на добавление или удаление задач из списка через сервер. Сервер создаётя и запускается в классе Main.
+После старта, он в бесконечном цикле принимает подключения и считывает с них одну строку, в которой будет располагаться json вида:</p>
+<p><code>{ "type": "ADD", "task": "Название задачи" }</code>
+где type - тип операции (ADD или REMOVE), а task - сама задача.</p>
+<p>Таким образом, одна операция соответствует одному запросу (а не один запрос с кучей строк-операций).
+Для парсинга входных данных подключения используем библиотеку GSon (com.google.code.gson:gson:2.8.9). Мы предполагаем, что на сервер всегда приходят корректные данные.
+В ответ на запрос сервер присылает текущее состояние списка задач после совершения операции и в том виде, в котором его возвращает операция getAllTasks (т.е. без всяких json и тп).</p>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div><!-- конец карточки -->
+  <!-- конец поста -->
+
+  </main>
+  <!-- Скрипты -->
+  <script src="/static/assets/purecounter/purecounter.js"></script>
+  <script src="/static/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/assets/glightbox/js/glightbox.min.js"></script>
+  <script src="/static/assets/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="/static/assets/swiper/swiper-bundle.min.js"></script>
+  <script src="/static/assets/waypoints/noframework.waypoints.js"></script>
+  <script src="/static/js/main.js"></script>
+</body>
+</html>

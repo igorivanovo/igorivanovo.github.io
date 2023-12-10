@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title></title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <link href="/static/img/favicon.png" rel="icon">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="/static/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/static/assets/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/static/assets/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/static/assets/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="/static/assets/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/static/assets/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/69e2443572.js" crossorigin="anonymous"></script>
+  <link href="/static/css/style.css" rel="stylesheet">
+  
+</head>
+<body>
+  <main id="main">
+
+<style>
+body::before {
+	background: #040404 url("/static/img/portfolio/post.jpg");
+}
+</style>
+    <!-- ======= шаблон для карточки портфолио ======= -->
+    <div id="portfolio-details" class="portfolio-details">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <h2 class="portfolio-title">Дипломная работа профессии «Java-разработка для начинающих»</h2>
+          </div>
+          <div class="col-lg-8 portfolio-info">
+            <h3></h3>
+            <ul>
+              <li><strong>Категория</strong>: Учебный Проект</li>
+              <li><strong>Описание</strong>: Наша цель - разработать класс поискового движка, который способен быстро находить указанное слово среди pdf-файлов, причём ранжировать результаты по количеству вхождений. Также у нас будет сервер, который обслуживает входящие запросы с помощью этого движка.</li>
+              <li><strong>Примечания</strong>: <a href="https://github.com/igorivanovo/pcs-final-diplom.git">Репозиаторий на GitHab</a></li>
+            </ul>
+            <p>
+              <h1>Дипломная работа. Поисковая система</h1>
+<p><img alt="netology logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Netology_logo.png/320px-Netology_logo.png" /></p>
+<p><a href="https://netology.ru/">официальный сайт</a></p>
+<p>В проекте есть:
+<br></p>
+<table>
+    <thead>
+           <tr>
+               <th>Класс</th>
+               <th>Описание</th>
+           </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td >`Main`</td>
+            <td > Запуск сервера, обслуживающего поисковые запросы</td>
+        </tr>
+        <tr>
+            <td>`PageEntry`</td>
+           <td>Класс, описывающий один элемент результата одного поиска. Он состоит из имени пдф-файла, номера страницы и количества раз, которое встретилось это слово на ней </td>
+        </tr>
+        <tr>
+            <td >`SearchEngine`</td>
+            <td >Интерфейс, описывающий поисковый движок.  На запрос из слова отвечает списком элементов результата ответа</td>
+        </tr>
+        <tr>
+            <td >`BooleanSearchEngine`</td>
+            <td>Реализация поискового движка. Слово `Boolean` пришло из теории информационного поиска, т.к. наш движок ищет в тексте ровно то слово, которое было указано, без использования синонимов и прочих приёмов нечёткого поиска </td>
+        </tr>
+    </tbody>
+
+</table>
+
+<p><br></p>
+<h2>PDF</h2>
+<p>Для работы с пдф мы используем библиотеку <code>com.itextpdf:itext7-core:7.1.15</code>:</p>
+<p><code>&lt;dependency&gt;</code><br>
+&ensp;  <code>&lt;groupId&gt;com.itextpdf&lt;/groupId&gt;</code><br>
+&ensp;  <code>&lt;artifactId&gt;itext7-core&lt;/artifactId&gt;</code><br>
+&ensp;  <code>&lt;version&gt;7.1.15&lt;/version&gt;</code><br>
+&ensp;  <code>&lt;type&gt;pom&lt;/type&gt;</code><br>
+<code>&lt;/dependency&gt;</code><br></p>
+<p>Основные инструменты из этой библиотеки :</p>
+<ul>
+<li>Чтобы создать объект пдф-документа, нужно указать объект <code>File</code> этого документа следующим
+  классам: <code>var doc = new PdfDocument(new PdfReader(pdf));</code>.</li>
+<li>Чтобы получить объект одной страницы документа, нужно вызвать <code>doc.getPage(номерСтраницы)</code>.
+  метод <code>doc.getNumberOfPages()</code>  узнать количество * страниц в документе.</li>
+<li>Чтобы получить текст со страницы, используем <code>var text = PdfTextExtractor.getTextFromPage(page);</code>.</li>
+<li>Чтобы разбить текст на слова (а они в этих документах разделены могут быть не только пробелами),
+  используем <code>var words = text.split("\\P{IsAlphabetic}+");</code>.</li>
+</ul>
+<h2>Индексация и поиск</h2>
+<p>реализации класса <code>BooleanSearchEngine</code>. Мы хотим чтобы поиск (метод <code>search</code>) работал быстро, поэтому предпочтём
+сканирование всех пдф-ок в конструкторе класса с сохранением информации для каждого слова из pdf-файлов. Тогда
+метод <code>search</code> сможет отрабатывать быстро, по сути возвращать уже посчитанный в конструкторе для слова готовый
+список-ответ. Т.е. в конструкторе для каждого слова сохраняем готовый на возможный будущий запрос ответ в
+виде <code>List&lt;PageEntry&gt;</code> (для этого используем мапу, где ключом будет слово, а значением - искомый список). Такое
+предварительное сканирование файлов по которым мы будем искать называется <em>индексацией</em>.</p>
+<p>В итоге,мы реализуем логику индексации в конструкторе. Сканируя каждый пдф-файл мы перебираем его страницы, для каждой
+страницы извлекаем из неё слова и подсчитываете их количество. После подсчёта, для каждого уникального слова пдф-файла
+создаём объект <code>PageEntry</code> и сохраняем в мапу в поле. Мы хотим регистронезависимый поиск, т.е. по слову "бизнес"
+учитывается и "бизнес", и "Бизнес" в документах (для этого при обработке достаточно каждое слово приводим в нижний
+регистр с помощью встроенного метода класса <code>String</code> для этих целей).
+Для подсчёта частоты слов используем следующий приём :</p>
+<p><code>Map&lt;String, Integer&gt; freqs=new HashMap&lt;&gt;();</code> // мапа, где ключом будет слово, а значением - частота<br>
+<code>for(var word:words){</code> // перебираем слова<br>
+<code>if(word.isEmpty()){</code><br>
+<code>continue;</code><br>
+<code>}</code><br>
+<code>word=word.toLowerCase();</code><br>
+<code>freqs.put(word,freqs.getOrDefault(word,0)+1);</code><br>
+<code>}</code><br></p>
+<p>Также, списки ответов для каждого слова отсортированы в порядке уменьшения поля <code>count</code>. Для этого класс <code>PageEntry</code>
+реализует интерфейс <code>Comparable</code>.</p>
+<p>Вот пример работы на слове "старт":</p>
+<p><code>[PageEntry{pdf=SoftSkills.pdf, page=3, count1}, PageEntry{pdf=Технология распознования лиц.pdf, page=6, count1}]</code></p>
+<p>на слове "арт":</p>
+<p><code>[PageEntry{pdf=Продвижение игр.pdf, page=1, count1}]</code></p>
+<p>на слове "нолан":</p>
+<p><code>[PageEntry{pdf=Продвижение игр.pdf, page=1, count1}]</code></p>
+<p>на слове "игра":</p>
+<p><code>[PageEntry{pdf=Продвижение игр.pdf, page=1, count1}, PageEntry{pdf=Продвижение игр.pdf, page=2, count1}, PageEntry{pdf=Продвижение игр.pdf, page=7, count1}]</code></p>
+<h2>Сервер</h2>
+<p>В <code>main</code>  запускается сервер, слушающий порт <code>8989</code>, к которому приходят подключения и на входной поток подавать одно
+слово (обозначим как <code>word</code>) или группа слов, отвечает результатом вызова метода <code>search(word)</code>, но в виде JSON-текста (
+библиотека для работы с JSON подключена к <code>pom.xml</code>).</p>
+<p><code>&lt;dependency&gt;</code><br>
+&ensp;<code>&lt;groupId&gt;com.google.code.gson&lt;/groupId&gt;</code><br>
+&ensp;<code>&lt;artifactId&gt;gson&lt;/artifactId&gt;</code><br>
+&ensp;<code>&lt;version&gt;2.10.1&lt;/version&gt;</code><br>
+<code>&lt;/dependency&gt;</code><br></p>
+<p>Пример ответа на запрос "старт":<br>
+<code>[</code><br>
+&ensp;<code>{</code><br>
+&ensp; <code>"pdfName": "SoftSkills.pdf",</code><br>
+&ensp; <code>"page": 3,</code><br>
+&ensp;   <code>"count": 1</code><br>
+&ensp;<code>},</code><br>
+&ensp;<code>{</code><br>
+&ensp; <code>"pdfName": "Технология распознования лиц.pdf",</code><br>
+&ensp;   <code>"page": 6,</code><br>
+&ensp;   <code>"count": 1</code><br>
+&ensp; <code>}</code><br>
+<code>]</code><br>
+Пример ответа на запрос "нолан игра арт в снег старт":<br>
+<code>[</code><br>
+<code>{</code><br>
+&ensp;<code>"pdfName": "Продвижение игр.pdf",</code><br>
+&ensp;<code>"page": 1,</code><br>
+&ensp;<code>"count": 3</code><br>
+&ensp;<code>},</code><br>
+<code>{</code><br>
+&ensp;<code>"pdfName": "Продвижение игр.pdf",</code><br>
+&ensp;<code>"page": 2,</code><br>
+&ensp;<code>"count": 1</code><br>
+<code>},</code><br>
+<code>{</code><br>
+&ensp;<code>"pdfName": "Продвижение игр.pdf",</code><br>
+&ensp;<code>"page": 7,</code><br>
+&ensp;<code>"count": 1</code><br>
+<code>},</code><br>
+<code>{</code><br>
+&ensp;<code>"pdfName": "SoftSkills.pdf",</code><br>
+&ensp;<code>"page": 3,</code><br>
+&ensp;<code>"count": 1</code><br>
+<code>},</code><br>
+<code>{</code><br>
+&ensp;<code>"pdfName": "Технология распознования лиц.pdf",</code><br>
+&ensp;<code>"page": 6,</code><br>
+&ensp;<code>"count": 1</code><br>
+<code>}</code><br>
+<code>]</code><br></p>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div><!-- конец карточки -->
+  <!-- конец поста -->
+
+  </main>
+  <!-- Скрипты -->
+  <script src="/static/assets/purecounter/purecounter.js"></script>
+  <script src="/static/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/assets/glightbox/js/glightbox.min.js"></script>
+  <script src="/static/assets/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="/static/assets/swiper/swiper-bundle.min.js"></script>
+  <script src="/static/assets/waypoints/noframework.waypoints.js"></script>
+  <script src="/static/js/main.js"></script>
+</body>
+</html>
